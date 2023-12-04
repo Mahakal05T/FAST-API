@@ -5,22 +5,23 @@ from fastapi.responses import HTMLResponse
 from config.db import conn
 from fastapi.templating import Jinja2Templates
 from schema.note import noteEntity, notesEntity
+
 note = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
 
 @note.get("/", response_class=HTMLResponse)
 async def read_item(request: Request):
-    docs = conn.notes.notes.find({})
-    newDocs = []
-    for doc in docs:
-        newDocs.append({
-            "id": doc["_id"],
-            "title": doc["title"],
-            "desc": doc["desc"],
-            "important": doc["important"]
+    doc = conn.notes.notes.find({})
+    newdocs = []
+    for docs in doc:
+        newdocs.append({
+            "id": docs["_id"],
+            "title": docs["title"],
+            "desc": docs["desc"],
+            "important": docs["important"]
         })
-    return templates.TemplateResponse("index.html", {"request": request, "newDocs": newDocs})
+    return templates.TemplateResponse("index.html", {"request": request, "newdocs": newdocs})
 
 
 @note.post("/")
