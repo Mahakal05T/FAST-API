@@ -1,11 +1,12 @@
 def noteEntity(item) -> dict:
     return {
         "id": str(item["_id"]),
-        "title": item["title"],
-        "desc": item["desc"],
-        "important": item["important"]
+        "title": str(item["title"]),
+        "desc": str(item["item"]),
+        "important": str(item["important"])
     }
 
 
 def notesEntity(items) -> list:
-    return [noteEntity(item) for item in items]
+    
+    return [noteEntity(items) for item in items]
